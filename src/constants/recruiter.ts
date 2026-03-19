@@ -116,7 +116,7 @@ export const recruiterProfile = {
   ],
   contact: {
     github: "https://github.com/Satyamsinghh76",
-    linkedin: "https://linkedin.com/in/satyamsingh",
-    email: "hello@satyamsingh.dev",
+    linkedin: "https://www.linkedin.com/in/satyam-singh-88988a279",
+    email: "satyamsinghlko48@gmail.com",
   },
 } as const;

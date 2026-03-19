@@ -1,7 +1,9 @@
 "use client";
 
+import { useState } from "react";
 import { recruiterProfile } from "@/constants/recruiter";
 import { useModal } from "@/components/ui/ModalProvider";
+import ContactForm from "@/components/ui/ContactForm";
 
 function SectionLabel({ number, title }: { number: string; title: string }) {
   return (
@@ -265,7 +267,7 @@ function Strengths() {
   );
 }
 
-function ContactSection() {
+function ContactSection({ onOpenForm }: { onOpenForm: () => void }) {
   const p = recruiterProfile;
   return (
     <section id="contact" className="border-t border-border/50">
@@ -276,12 +278,13 @@ function ContactSection() {
             Interested in working together? Let&apos;s connect.
           </p>
           <div className="flex gap-3">
-            <a
-              href={`mailto:${p.contact.email}`}
+            <button
+              type="button"
+              onClick={onOpenForm}
               className="rounded-full bg-primary px-5 py-2.5 text-body-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
             >
               Send Email
-            </a>
+            </button>
             <a
               href={p.contact.linkedin}
               target="_blank"
@@ -298,6 +301,8 @@ function ContactSection() {
 }
 
 export default function RecruiterView() {
+  const [formOpen, setFormOpen] = useState(false);
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -305,7 +310,8 @@ export default function RecruiterView() {
       <SkillsGrid />
       <ProjectsList />
       <Strengths />
-      <ContactSection />
+      <ContactSection onOpenForm={() => setFormOpen(true)} />
+      <ContactForm isOpen={formOpen} onClose={() => setFormOpen(false)} />
     </div>
   );
 }

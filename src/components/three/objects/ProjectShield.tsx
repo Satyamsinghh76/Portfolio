@@ -31,7 +31,7 @@ export default function ProjectShield() {
     <InteractiveObject
       projectId="fraud-detection"
       label="Fraud Detection — ML System"
-      position={[-2.5, -2, -2]}
+      position={[2, -2, -2]}
       glowColor="#f87171"
     >
       <Float speed={1.8} rotationIntensity={0.3} floatIntensity={1}>

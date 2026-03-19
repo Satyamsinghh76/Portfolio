@@ -20,7 +20,7 @@ export default function SkillNodes() {
   const innerRadius = 0.65;
 
   return (
-    <group position={[3.8, -1.8, -3.5]}>
+    <group position={[5.2, -1.8, -3.5]}>
       {/* Center core */}
       <mesh>
         <sphereGeometry args={[0.12, 8, 8]} />

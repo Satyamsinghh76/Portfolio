@@ -13,6 +13,7 @@ export default function HologramText() {
     if (!groupRef.current) return;
     const t = clock.getElapsedTime();
     groupRef.current.position.y = 3.2 + Math.sin(t * 0.5) * 0.12;
+    groupRef.current.position.x = 3;
 
     if (ghostRef.current) {
       ghostRef.current.position.z = -0.15 + Math.sin(t * 0.8) * 0.03;
@@ -20,7 +21,7 @@ export default function HologramText() {
   });
 
   return (
-    <group ref={groupRef} position={[0, 3.2, -3]}>
+    <group ref={groupRef} position={[3, 3.2, -3]}>
       {/* Primary text */}
       <Text
         fontSize={0.55}

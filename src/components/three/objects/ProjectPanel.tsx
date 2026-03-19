@@ -21,7 +21,7 @@ export default function ProjectPanel() {
     <InteractiveObject
       projectId="spendsense"
       label="SpendSense — Finance Tracker"
-      position={[-4, -0.5, -3]}
+      position={[0.5, -0.5, -3]}
       glowColor="#34d399"
     >
       <Float speed={1.2} rotationIntensity={0.1} floatIntensity={0.6}>

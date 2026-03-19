@@ -33,7 +33,7 @@ export default function AiOrb({ reduced = false }: AiOrbProps) {
   const ringSegments = reduced ? 32 : 64;
 
   return (
-    <group position={[4.2, 1.8, -3]}>
+    <group position={[5.5, 1.8, -3]}>
       <mesh ref={orbRef}>
         <sphereGeometry args={[0.4, segments, segments]} />
         <MeshDistortMaterial

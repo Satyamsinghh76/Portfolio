@@ -33,7 +33,7 @@ export default function ProjectGlobe() {
     <InteractiveObject
       projectId="travel-planner"
       label="Travel Planner — Smart Itineraries"
-      position={[2.8, -0.3, -2.5]}
+      position={[4.5, -0.3, -2.5]}
       glowColor="#a78bfa"
     >
       <Float speed={1.3} rotationIntensity={0.2} floatIntensity={0.7}>

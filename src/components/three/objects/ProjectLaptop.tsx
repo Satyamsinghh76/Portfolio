@@ -19,7 +19,7 @@ export default function ProjectLaptop() {
     <InteractiveObject
       projectId="bookflow"
       label="BookFlow — SaaS Booking"
-      position={[-3, 1.2, -1.5]}
+      position={[1, 1.2, -1.5]}
       glowColor="#60a5fa"
     >
       <Float speed={1.5} rotationIntensity={0.15} floatIntensity={0.8}>

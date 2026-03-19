@@ -13,7 +13,6 @@ import ProjectPanel from "./objects/ProjectPanel";
 import ProjectShield from "./objects/ProjectShield";
 import ProjectGlobe from "./objects/ProjectGlobe";
 import ProjectFrame from "./objects/ProjectFrame";
-import AiOrb from "./objects/AiOrb";
 import SkillNodes from "./objects/SkillNodes";
 
 export default function HeroScene() {
@@ -63,10 +62,9 @@ export default function HeroScene() {
         <ProjectPanel />
         <ProjectShield />
         <ProjectGlobe />
-        {showFull && <ProjectFrame />}
+        <ProjectFrame />
 
         {/* Right side — conditional */}
-        <AiOrb reduced={tier !== "high"} />
         {showFull && <SkillNodes />}
 
         {/* Environment — skip on mobile/degraded */}

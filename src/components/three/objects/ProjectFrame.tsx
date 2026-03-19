@@ -24,7 +24,7 @@ export default function ProjectFrame() {
     <InteractiveObject
       projectId="memory-gallery"
       label="Memory Gallery — Visual Timeline"
-      position={[-0.8, -3, -2]}
+      position={[5.5, 1.8, -3]}
       glowColor="#f472b6"
     >
       <Float speed={1.4} rotationIntensity={0.15} floatIntensity={0.9}>
