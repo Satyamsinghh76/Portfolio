@@ -5,7 +5,7 @@ export const siteConfig = {
   title: "Satyam Singh | Software Developer",
   description:
     "Software developer crafting clean, performant digital products that solve real problems.",
-  url: "https://satyamsingh.dev",
+  url: "https://portfolio-of-satyam-singh.vercel.app",
   email: "satyamsinghlko48@gmail.com",
   links: {
     github: "https://github.com/Satyamsinghh76",
