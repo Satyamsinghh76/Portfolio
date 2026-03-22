@@ -95,7 +95,7 @@ export default function ProjectModal() {
               duration: 0.35,
               ease: [0.22, 1, 0.36, 1] as const,
             }}
-            className="custom-scrollbar relative z-10 max-h-[88vh] w-full max-w-2xl overflow-y-auto rounded-2xl border border-border/50 bg-background shadow-2xl"
+            className="custom-scrollbar relative z-10 max-h-[90dvh] w-full max-w-2xl overflow-y-auto rounded-xl border border-border/50 bg-background shadow-2xl sm:max-h-[88vh] sm:rounded-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Gradient header strip */}
@@ -131,7 +131,7 @@ export default function ProjectModal() {
 
             {/* Content with staggered animation */}
             <motion.div
-              className="p-8 sm:p-10"
+              className="p-5 sm:p-8 md:p-10"
               variants={stagger}
               initial="initial"
               animate="animate"
@@ -161,7 +161,7 @@ export default function ProjectModal() {
               {/* Problem & Solution */}
               <motion.div
                 variants={fadeInUp}
-                className="mb-8 grid gap-4 sm:grid-cols-2"
+                className="mb-6 grid gap-3 sm:mb-8 sm:gap-4 sm:grid-cols-2"
               >
                 <div className="rounded-xl border border-border/50 bg-surface-elevated p-5">
                   <SectionLabel>The Problem</SectionLabel>

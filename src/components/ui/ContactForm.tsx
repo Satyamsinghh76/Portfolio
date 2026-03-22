@@ -86,7 +86,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.93, y: 24 }}
             transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] as const }}
-            className="relative z-10 w-full max-w-lg overflow-hidden rounded-2xl border border-border/50 bg-background shadow-2xl"
+            className="relative z-10 w-full max-w-lg overflow-hidden rounded-xl border border-border/50 bg-background shadow-2xl sm:rounded-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Gradient top strip */}
@@ -104,7 +104,7 @@ export default function ContactForm({ isOpen, onClose }: ContactFormProps) {
               </svg>
             </button>
 
-            <div className="p-8 sm:p-10">
+            <div className="p-5 sm:p-8 md:p-10">
               {/* Header */}
               <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-primary">
                 Get in Touch

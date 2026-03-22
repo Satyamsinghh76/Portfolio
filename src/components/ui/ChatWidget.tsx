@@ -178,7 +178,7 @@ export default function ChatWidget() {
       <motion.button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/25 transition-colors hover:brightness-110"
+        className="fixed bottom-4 right-4 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/25 transition-colors hover:brightness-110 sm:bottom-6 sm:right-6 sm:h-14 sm:w-14"
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         aria-label={isOpen ? "Close chat" : "Open AI assistant"}
@@ -234,7 +234,7 @@ export default function ChatWidget() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.95 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] as const }}
-            className="fixed bottom-24 right-6 z-40 flex h-[min(520px,75vh)] w-[min(400px,calc(100vw-48px))] flex-col overflow-hidden rounded-2xl border border-border/50 bg-background shadow-2xl"
+            className="fixed bottom-20 right-3 z-40 flex h-[min(520px,80dvh)] w-[min(400px,calc(100vw-24px))] flex-col overflow-hidden rounded-xl border border-border/50 bg-background shadow-2xl sm:bottom-24 sm:right-6 sm:rounded-2xl sm:w-[min(400px,calc(100vw-48px))]"
           >
             {/* Header */}
             <div className="flex items-center gap-3 border-b border-border/50 bg-surface-elevated px-5 py-4">

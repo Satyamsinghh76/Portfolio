@@ -4,6 +4,7 @@ import { Canvas } from "@react-three/fiber";
 import { Preload, PerformanceMonitor, AdaptiveDpr } from "@react-three/drei";
 import { Suspense, useState, useCallback } from "react";
 import { useDevicePerformance } from "@/hooks/useDevicePerformance";
+import { useResponsive } from "@/hooks/useResponsive";
 import MouseCamera from "./MouseCamera";
 import Lighting from "./Lighting";
 import SceneEnvironment from "./SceneEnvironment";
@@ -16,33 +17,40 @@ import ProjectFrame from "./objects/ProjectFrame";
 import SkillNodes from "./objects/SkillNodes";
 
 export default function HeroScene() {
-  const { tier, dpr, isMobile } = useDevicePerformance();
+  const { tier, dpr, isMobile: perfMobile } = useDevicePerformance();
+  const { fov, cameraZ, sceneScale, isMobile, isTablet } = useResponsive();
   const [degraded, setDegraded] = useState(false);
 
   const handleDecline = useCallback(() => setDegraded(true), []);
 
-  // Mid-tier: skip environment particles and one project object
   const showFull = tier === "high" && !degraded;
-  const showEnvironment = !isMobile && !degraded;
+  const showEnvironment = !perfMobile && !isMobile && !degraded;
+  const mobile = perfMobile || isMobile;
+
+  // Clamp DPR to max 2 for Retina, min 1 for low-end
+  const clampedDpr: [number, number] = [
+    Math.max(dpr[0], 1),
+    Math.min(dpr[1], 2),
+  ];
 
   return (
     <Canvas
-      camera={{ position: [0, 0, 8], fov: 42 }}
-      dpr={dpr}
+      camera={{ position: [0, 0, cameraZ], fov }}
+      dpr={clampedDpr}
       gl={{
-        antialias: tier === "high",
+        antialias: tier === "high" && !isMobile,
         alpha: true,
         powerPreference: "high-performance",
         stencil: false,
         depth: true,
       }}
-      style={{ pointerEvents: "auto" }}
+      style={{ pointerEvents: "auto", touchAction: "none" }}
       frameloop="always"
       flat={tier !== "high"}
+      resize={{ scroll: false, debounce: { scroll: 0, resize: 100 } }}
     >
       <fog attach="fog" args={["#09090b", 8, 28]} />
 
-      {/* Auto-degrade when FPS drops below 40 */}
       <PerformanceMonitor
         onDecline={handleDecline}
         flipflops={2}
@@ -50,25 +58,33 @@ export default function HeroScene() {
       />
       <AdaptiveDpr pixelated />
 
-      {!isMobile && <MouseCamera />}
-      <Lighting reduced={tier !== "high" || degraded} />
+      {!mobile && <MouseCamera />}
+      <Lighting reduced={tier !== "high" || degraded || isMobile} />
 
       <Suspense fallback={null}>
-        {/* Center — always visible */}
-        <HologramText />
+        {/* Scale everything based on viewport */}
+        <group scale={sceneScale}>
+          {/* Center — always visible */}
+          <HologramText isMobile={mobile} />
 
-        {/* Projects — always visible (they're interactive) */}
-        <ProjectLaptop />
-        <ProjectPanel />
-        <ProjectShield />
-        <ProjectGlobe />
-        <ProjectFrame />
+          {/* Projects — always visible (interactive) */}
+          <ProjectLaptop />
+          <ProjectPanel />
+          <ProjectShield />
 
-        {/* Right side — conditional */}
-        {showFull && <SkillNodes />}
+          {/* These can be hidden on very small mobile to save GPU */}
+          {!mobile && <ProjectGlobe />}
+          {!mobile && <ProjectFrame />}
 
-        {/* Environment — skip on mobile/degraded */}
-        {showEnvironment && <SceneEnvironment />}
+          {/* Show globe/frame on tablet */}
+          {isTablet && <ProjectGlobe />}
+
+          {/* Right side — conditional */}
+          {showFull && !mobile && <SkillNodes />}
+
+          {/* Environment — skip on mobile/degraded */}
+          {showEnvironment && <SceneEnvironment />}
+        </group>
 
         <Preload all />
       </Suspense>

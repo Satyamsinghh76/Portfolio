@@ -114,4 +114,9 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
+
+  /* Prevent pull-to-refresh on 3D canvas */
+  .touch-none-canvas canvas {
+    touch-action: none;
+  }
 }

@@ -5,15 +5,26 @@ import { useFrame } from "@react-three/fiber";
 import { Text } from "@react-three/drei";
 import * as THREE from "three";
 
-export default function HologramText() {
+interface HologramTextProps {
+  isMobile?: boolean;
+}
+
+export default function HologramText({ isMobile = false }: HologramTextProps) {
   const groupRef = useRef<THREE.Group>(null);
   const ghostRef = useRef<THREE.Group>(null);
+
+  // Mobile: shift to center-top, desktop: right side
+  const baseX = isMobile ? 0 : 3;
+  const baseY = isMobile ? 2.5 : 3.2;
+  const baseZ = isMobile ? -1 : -3;
+  const fontSize = isMobile ? 0.4 : 0.55;
+  const subSize = isMobile ? 0.1 : 0.15;
 
   useFrame(({ clock }) => {
     if (!groupRef.current) return;
     const t = clock.getElapsedTime();
-    groupRef.current.position.y = 3.2 + Math.sin(t * 0.5) * 0.12;
-    groupRef.current.position.x = 3;
+    groupRef.current.position.y = baseY + Math.sin(t * 0.5) * 0.12;
+    groupRef.current.position.x = baseX;
 
     if (ghostRef.current) {
       ghostRef.current.position.z = -0.15 + Math.sin(t * 0.8) * 0.03;
@@ -21,10 +32,10 @@ export default function HologramText() {
   });
 
   return (
-    <group ref={groupRef} position={[3, 3.2, -3]}>
+    <group ref={groupRef} position={[baseX, baseY, baseZ]}>
       {/* Primary text */}
       <Text
-        fontSize={0.55}
+        fontSize={fontSize}
         letterSpacing={0.15}
         anchorX="center"
         anchorY="middle"
@@ -41,7 +52,7 @@ export default function HologramText() {
       {/* Ghost layer for hologram depth */}
       <group ref={ghostRef}>
         <Text
-          fontSize={0.55}
+          fontSize={fontSize}
           letterSpacing={0.15}
           position={[0, 0, -0.12]}
           anchorX="center"
@@ -59,7 +70,7 @@ export default function HologramText() {
 
       {/* Subtitle */}
       <Text
-        fontSize={0.15}
+        fontSize={subSize}
         letterSpacing={0.3}
         position={[0, -0.45, 0]}
         anchorX="center"
